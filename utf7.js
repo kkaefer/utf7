@@ -13,11 +13,11 @@ function encode(str) {
         b[bi++] = c & 0xFF;
     }
     // Modified Base64 uses , instead of / and omits trailing =.
-    return b.toString('base64').replace(/\//g, ',').replace(/=+$/, '');
+    return b.toString('base64').replace(/=+$/, '');
 }
 
 function decode(str) {
-    var b = new Buffer(str.replace(/,/g, '/'), 'base64');
+    var b = new Buffer(str, 'base64');
     var r = [];
     for (var i = 0; i < b.length;) {
         // Calculate charcode from two adjacent bytes.
@@ -74,13 +74,14 @@ exports.imap.encode = function(str) {
     // We replace subsequent non-representable chars with their escape sequence.
     return str.replace(/&/g, '&-').replace(/[^\x20-\x7e]+/g, function(chunk) {
         // & is represented by an empty sequence &-, otherwise call encode().
-        return '&' + (chunk === '&' ? '' : encode(chunk)) + '-';
+        chunk = (chunk === '&' ? '' : encode(chunk)).replace(/\//g, ',');
+        return '&' + chunk + '-';
     });
 };
 
 // RFC 2152 UTF-7 decoding.
 exports.decode = function(str) {
-    return str.replace(/\+([A-Za-z0-9,]*)-?/gi, function(_, chunk) {
+    return str.replace(/\+([A-Za-z0-9\/]*)-?/gi, function(_, chunk) {
         // &- represents &.
         if (chunk === '') return '+';
         return decode(chunk);
@@ -92,6 +93,6 @@ exports.imap.decode = function(str) {
     return str.replace(/&([^-]*)-/g, function(_, chunk) {
         // &- represents &.
         if (chunk === '') return '&';
-        return decode(chunk);
+        return decode(chunk.replace(/,/g, '/'));
     });
 };

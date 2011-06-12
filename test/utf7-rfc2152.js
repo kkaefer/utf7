@@ -30,8 +30,8 @@ exports['test conversion from utf8 to utf7'] = function() {
   assert.equal('Hot +- Spicy +- Fruity', utf7.encode('Hot + Spicy + Fruity', ' '));
   assert.equal('Hot+ACAAKwAg-Spicy+ACAAKwAg-Fruity', utf7.encode('Hot + Spicy + Fruity'));
 
-  // Slashes are converted to commas.
-  assert.equal('+,,,typh2VDIf7Q-', utf7.encodeAll('\uffff\uedca\u9876\u5432\u1fed'));
+  // Slashes in the beginning.
+  assert.equal('+///typh2VDIf7Q-', utf7.encodeAll('\uffff\uedca\u9876\u5432\u1fed'));
 
   // + sign around non-ASCII chars
   assert.equal('+AOQAKwDkACsA5A-', utf7.encodeAll('\u00E4+\u00E4+\u00E4'));
@@ -55,8 +55,8 @@ exports['test conversion from utf7 to utf8'] = function() {
   assert.equal('Hot + Spicy + Fruity', utf7.decode('Hot +- Spicy +- Fruity'));
   assert.equal('Hot + Spicy + Fruity', utf7.decode('Hot+ACAAKwAg-Spicy+ACAAKwAg-Fruity'));
 
-  // Slashes are converted to commas.
-  assert.equal('\uffff\uedca\u9876\u5432\u1fed', utf7.decode('+,,,typh2VDIf7Q-'));
+  // Slashes in the beginning.
+  assert.equal('\uffff\uedca\u9876\u5432\u1fed', utf7.decode('+///typh2VDIf7Q-'));
 
   // + sign around non-ASCII chars
   assert.equal('\u00E4+\u00E4+\u00E4', utf7.decode('+AOQ-+-+AOQ-+-+AOQ-'));
