@@ -16,6 +16,8 @@ var decoded = utf7.decode(encoded);
 assert.equal('Jyväskylä', decoded);
 ```
 
+By default, `.encode()` only encodes the default characeters defined in RFC 2152. To also encode optional characters, use `.encodeAll()` or specify the characters you want to encode as the second argument to `.encode()`.
+
 **IMAP (RFC 3501)**
 
 ```javascript
