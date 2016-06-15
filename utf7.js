@@ -1,7 +1,10 @@
 var Buffer = require('buffer').Buffer;
 
 function encode(str) {
-    var b = new Buffer(str.length * 2, 'ascii');
+    if (process.version >= 'v6.0.0')
+        var b = new Buffer.alloc(str.length * 2, encoding='ascii');
+    else
+        var b = new Buffer(str.length *2, 'ascii');
     for (var i = 0, bi = 0; i < str.length; i++) {
         // Note that we can't simply convert a UTF-8 string to Base64 because
         // UTF-8 uses a different encoding. In modified UTF-7, all characters
@@ -17,7 +20,10 @@ function encode(str) {
 }
 
 function decode(str) {
-    var b = new Buffer(str, 'base64');
+    if (process.version >= 'v6.0.0')
+        var b = new Buffer.from(str, 'base64');
+    else
+        var b = new Buffer(str, 'base64');
     var r = [];
     for (var i = 0; i < b.length;) {
         // Calculate charcode from two adjacent bytes.
