@@ -1,7 +1,17 @@
 var Buffer = require('buffer').Buffer;
 
+if (process.version >= 'v6.0.0') {
+    function allocateAsciiBuffer(length) {
+        return Buffer.alloc(length, encoding='ascii');
+    }
+} else {
+    function allocateAsciiBuffer(length) {
+        return new Buffer(length, 'ascii');
+    }
+}
+
 function encode(str) {
-    var b = new Buffer(str.length * 2, 'ascii');
+    var b = allocateAsciiBuffer(str.length * 2);
     for (var i = 0, bi = 0; i < str.length; i++) {
         // Note that we can't simply convert a UTF-8 string to Base64 because
         // UTF-8 uses a different encoding. In modified UTF-7, all characters
@@ -16,8 +26,18 @@ function encode(str) {
     return b.toString('base64').replace(/=+$/, '');
 }
 
+if (process.version >= 'v6.0.0') {
+    function allocateBase64Buffer(str) {
+        return Buffer.from(str, encoding='base64');
+    }
+} else {
+    function allocateBase64Buffer(str) {
+        return new Buffer(str, 'base64');
+    }
+}
+
 function decode(str) {
-    var b = new Buffer(str, 'base64');
+    var b = allocateBase64Buffer(str);
     var r = [];
     for (var i = 0; i < b.length;) {
         // Calculate charcode from two adjacent bytes.
