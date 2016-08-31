@@ -8,6 +8,10 @@
     "main": "./utf7",
 
     "devDependencies": {
-        "expresso" : "0.7.x"
+        "tape" : "~4.6.0"
+    },
+
+    "scripts": {
+        "test": "tape test/*.js"
     }
 }

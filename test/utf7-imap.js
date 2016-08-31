@@ -1,7 +1,9 @@
-var assert = require('assert');
+var test = require('tape');
 var utf7 = require('..').imap;
 
-exports['test conversion from utf8 to utf7'] = function() {
+test('test conversion from utf8 to utf7', function(assert) {
+  assert.plan(9);
+
   // Examples from RFC 2152.
   assert.equal('A&ImIDkQ-.', utf7.encode('A\u2262\u0391.'));
   assert.equal('&ZeVnLIqe-', utf7.encode('\u65E5\u672C\u8A9E'));
@@ -20,9 +22,11 @@ exports['test conversion from utf8 to utf7'] = function() {
 
   // & sign around non-ASCII chars
   assert.equal('&AOQ-&-&AOQ-&-&AOQ-', utf7.encode('\u00E4&\u00E4&\u00E4'));
-};
+});
 
-exports['test conversion from utf7 to utf8'] = function() {
+test('test conversion from utf7 to utf8', function(assert) {
+  assert.plan(9);
+
   // Examples from RFC 2152.
   assert.equal('A\u2262\u0391.', utf7.decode('A&ImIDkQ-.'));
   assert.equal('\u65E5\u672C\u8A9E', utf7.decode('&ZeVnLIqe-'));
@@ -41,4 +45,4 @@ exports['test conversion from utf7 to utf8'] = function() {
 
   // & sign around non-ASCII chars
   assert.equal('\u00E4&\u00E4&\u00E4', utf7.decode('&AOQ-&-&AOQ-&-&AOQ-'));
-};
+});
