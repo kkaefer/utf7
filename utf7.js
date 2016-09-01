@@ -1,8 +1,9 @@
 var Buffer = require('buffer').Buffer;
+var semver = require('semver');
 
-if (process.version >= 'v6.0.0') {
+if (semver.gte(process.version, '6.0.0')) {
     function allocateAsciiBuffer(length) {
-        return Buffer.alloc(length, encoding='ascii');
+        return Buffer.alloc(length, 'ascii');
     }
 } else {
     function allocateAsciiBuffer(length) {
@@ -26,9 +27,9 @@ function encode(str) {
     return b.toString('base64').replace(/=+$/, '');
 }
 
-if (process.version >= 'v6.0.0') {
+if (semver.gte(process.version, '6.0.0')) {
     function allocateBase64Buffer(str) {
-        return Buffer.from(str, encoding='base64');
+        return Buffer.from(str, 'base64');
     }
 } else {
     function allocateBase64Buffer(str) {
