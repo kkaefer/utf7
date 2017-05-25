@@ -27,7 +27,7 @@ function encode(str) {
     return b.toString('base64').replace(/=+$/, '');
 }
 
-if (semver.gte(process.version, '6.0.0')) {
+if (semver.gte(process.version || '6.0.0', '6.0.0')) {
     function allocateBase64Buffer(str) {
         return Buffer.from(str, 'base64');
     }
