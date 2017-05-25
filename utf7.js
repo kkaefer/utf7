@@ -1,7 +1,7 @@
 var Buffer = require('buffer').Buffer;
 var semver = require('semver');
 
-if (semver.gte(process.version, '6.0.0')) {
+if (semver.gte(process.version || '6.0.0', '6.0.0')) {
     function allocateAsciiBuffer(length) {
         return Buffer.alloc(length, 'ascii');
     }
