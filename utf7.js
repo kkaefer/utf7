@@ -59,7 +59,9 @@ var setW = escape(" \r\n\t");
 
 // Stores compiled regexes for various replacement pattern.
 var regexes = {};
-var regexAll = new RegExp("[^" + setW + setD + setO + "]+", 'g');
+
+// This regex matches all characters
+var regexAll = new RegExp("[\u0000-\uFFFF]+", 'g');
 
 exports.imap = {};
 
