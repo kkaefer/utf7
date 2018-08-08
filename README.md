@@ -31,3 +31,8 @@ assert.equal('"&T2BZfQ-" hei&AN8-t "Hallo"', encoded);
 var decoded = utf7.decode(encoded);
 assert.equal('"你好" heißt "Hallo"', decoded);
 ```
+
+## Further information
+
+This is a fork of utf7 by Konstantin Kaefer: https://github.com/kkaefer/utf7
+It fixes issues with encodeAll to encode every character.
