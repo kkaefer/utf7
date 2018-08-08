@@ -32,7 +32,7 @@ var decoded = utf7.decode(encoded);
 assert.equal('"你好" heißt "Hallo"', decoded);
 ```
 
-## Further information
+## Fork
 
 This is a fork of utf7 by Konstantin Kaefer: https://github.com/kkaefer/utf7
 
