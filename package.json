@@ -3,7 +3,11 @@
     "version": "1.0.2",
     "description": "Converts text to and from UTF-7 (RFC 2152 and IMAP)",
     "author": "Konstantin Käfer <kkaefer@gmail.com>",
-    "licenses": [ { "type": "BSD" } ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kkaefer/utf7"
+    },
 
     "main": "./utf7",
 
