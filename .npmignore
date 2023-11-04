@@ -1,0 +1,5 @@
+﻿node_modules
+package-lock.json
+test-results.xml
+test
+.circleci
