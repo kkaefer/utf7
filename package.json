@@ -10,11 +10,20 @@
         "semver": "^5.7.2"
     },
     "devDependencies": {
-        "tape": "~4.6.0"
+        "tape": "~4.6.0",
+        "tap-xunit": "^2.4.1",
+        "npmrc": "^1.1.1"
     },
     "scripts": {
-        "test": "tape test/*.js"
+        "test": "tape test/*.js | tap-xunit > test-results.xml"
     },
-    "engines": { "node": ">=10.0.0" },
-    "keywords": [ "imap", "mail", "utf7", "rfc2152"]
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "keywords": [
+        "imap",
+        "mail",
+        "utf7",
+        "rfc2152"
+    ]
 }
